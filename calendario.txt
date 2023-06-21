@@ -1,0 +1,43 @@
+Día/Mes/Año|Disponible
+20/06/2023|Disponible
+21/06/2023|Disponible
+22/06/2023|No disponible
+23/06/2023|Disponible
+24/06/2023|Disponible
+25/06/2023|Disponible
+26/06/2023|No disponible
+27/06/2023|No disponible
+28/06/2023|Disponible
+29/06/2023|Disponible
+30/06/2023|No disponible
+01/07/2023|Disponible
+02/07/2023|No disponible
+03/07/2023|Disponible
+04/07/2023|No disponible
+05/07/2023|Disponible
+06/07/2023|No disponible
+07/07/2023|No disponible
+08/07/2023|Disponible
+09/07/2023|No disponible
+10/07/2023|Disponible
+11/07/2023|No disponible
+12/07/2023|Disponible
+13/07/2023|Disponible
+14/07/2023|Disponible
+15/07/2023|Disponible
+16/07/2023|No disponible
+17/07/2023|Disponible
+18/07/2023|No disponible
+19/07/2023|Disponible
+20/07/2023|Disponible
+21/07/2023|Disponible
+22/07/2023|No disponible
+23/07/2023|Disponible
+24/07/2023|Disponible
+25/07/2023|Disponible
+26/07/2023|No disponible
+27/07/2023|No disponible
+28/07/2023|Disponible
+29/07/2023|Disponible
+30/07/2023|No disponible
+31/07/2023|Disponible
