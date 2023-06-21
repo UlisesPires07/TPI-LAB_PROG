@@ -1,0 +1,24 @@
+num|servicio|costo|disponibilidad
+1|DJ|1000|Disponible
+2|Decoración|500|Disponible
+3|Cotillón|800|Disponible
+4|Máquina de humo|700|Disponible
+5|Maquillaje|500|Disponible
+6|Música en vivo|2000|Disponible
+7|Animador|1500|Disponible
+8|Fotografía|3000|Disponible
+9|Video|5000|Disponible
+10|Catering|8000|Disponible
+11|Pastelería|5900|Disponible
+12|Barra de tragos|7800|Disponible
+13|Seguridad|20000|Disponible
+14|Iluminación|1200|Disponible
+15|Sonido|9000|Disponible
+16|Alquiler de mobiliario|1230|Disponible
+17|Servicio de meseros|5830|Disponible
+18|Show de fuegos artificiales|12547|Disponible
+19|Servicio de limpieza|12500|Disponible
+20|Karaoke|5000|Disponible
+21|Bailarines profesionales|10000|Disponible
+22|Servicio de fotomatón|4000|Disponible
+23|Espectáculo de danza|15000|Disponible
