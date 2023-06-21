@@ -1,0 +1,5 @@
+num|lugar|costo|disponibilidad
+1|Royal House|20000|Disponible
+2|La Quinta Eventos|50000|Disponible
+3|Greystone|35000|Disponible
+4|Monet|25000|Disponible
