@@ -79,38 +79,6 @@ Luego se proporcionarán los métodos para imprimir los mensajes que indican: fe
 
 CLASES
 
-calendario.py
-
-Esta clase se encarga de gestionar los eventos y verificar la disponibilidad de fechas.
-__init__(self): Constructor de la clase Calendario que inicializa el atributo eventos como un diccionario vacío.
-def __init__(self):
-    self.eventos = {}
-Este método se ejecuta al crear una instancia de la clase Calendario.
-verificar_disponibilidad(self, fecha): Verifica la disponibilidad de un evento en la fecha especificada.
-def verificar_disponibilidad(self, fecha):
-    if fecha in self.eventos:
-        return self.eventos[fecha]
-Este método verifica si la fecha especificada se encuentra en el diccionario eventos y devuelve su estado de disponibilidad.
-
-
-3.buscar_fecha_disponible(self, fecha): Busca la próxima fecha disponible a partir de la fecha especificada.
-def buscar_fecha_disponible (self, fecha):
-    fecha_obj = datetime.strptime(fecha, "%d/%m/%Y")
-    while True:
-        fecha_obj += timedelta(days=1)
-        fecha_nueva = fecha_obj.strftime("%d/%m/%Y")
-        if self.verificar_disponibilidad(fecha_nueva) == "Disponible":
-            return fecha_nueva
-Este método de la clase Calendario se utiliza para buscar la siguiente fecha disponible a partir de una fecha dada. Toma un parámetro fecha y lo convierte en un objeto datetime utilizando el método strptime(). Luego, en un bucle infinito, incrementa la fecha en un día utilizando el objeto timedelta y lo formatea nuevamente como una cadena en el formato "%d/%m/%Y" utilizando el método strftime(). En cada iteración, se verifica la disponibilidad de la nueva fecha utilizando el método verificar_disponibilidad(). Si la disponibilidad es "Disponible", se devuelve la nueva fecha.
-
-
-Además, este método toma una fecha en formato de cadena, la convierte en un objeto datetime y luego busca la próxima fecha disponible incrementando un día en cada iteración. Si encuentra una fecha disponible, la devuelve como una cadena en formato:
-"DD/MM/AAAA"
-
-
-Con estos métodos, la clase Calendario permite verificar la disponibilidad de eventos en una fecha específica y buscar la próxima fecha disponible a partir de una fecha dada.
-
-
 cliente.py
 
 
@@ -191,6 +159,31 @@ El programa utiliza archivos de texto para almacenar y cargar datos como el cale
 
 El programa ofrece opciones para cargar y mostrar el calendario, lugares y servicios disponibles, ingresar datos del cliente, realizar una reserva y cancelar una reserva. También se ejecuta un menú que permite al usuario interactuar con el sistema y seleccionar las diferentes opciones.
 
+En el caso del calendario, las primeras acciones que se desarrollan son:
+
+verificar_disponibilidad(self, fecha): Verifica la disponibilidad de un evento en la fecha especificada.
+def verificar_disponibilidad(self, fecha):
+    if fecha in self.eventos:
+        return self.eventos[fecha]
+Este método verifica si la fecha especificada se encuentra en el diccionario eventos y devuelve su estado de disponibilidad.
+
+
+2. buscar_fecha_disponible(self, fecha): Busca la próxima fecha disponible a partir de la fecha especificada.
+def buscar_fecha_disponible (self, fecha):
+    fecha_obj = datetime.strptime(fecha, "%d/%m/%Y")
+    while True:
+        fecha_obj += timedelta(days=1)
+        fecha_nueva = fecha_obj.strftime("%d/%m/%Y")
+        if self.verificar_disponibilidad(fecha_nueva) == "Disponible":
+            return fecha_nueva
+Este método se utiliza para buscar la siguiente fecha disponible a partir de una fecha dada. Toma un parámetro fecha y lo convierte en un objeto datetime utilizando el método strptime(). Luego, en un bucle infinito, incrementa la fecha en un día utilizando el objeto timedelta y lo formatea nuevamente como una cadena en el formato "%d/%m/%Y" utilizando el método strftime(). En cada iteración, se verifica la disponibilidad de la nueva fecha utilizando el método verificar_disponibilidad(). Si la disponibilidad es "Disponible", se devuelve la nueva fecha.
+
+
+Además, este método toma una fecha en formato de cadena, la convierte en un objeto datetime y luego busca la próxima fecha disponible incrementando un día en cada iteración. Si encuentra una fecha disponible, la devuelve como una cadena en formato:
+"DD/MM/AAAA"
+
+
+Los próximos métodos componen el sistema de reservas:
 1. `__init__(self)`: Constructor de la clase `SistemaReservas` que inicializa los atributos `vista`, `lugares`, `servicios`, `calendario` y `eventos`.
 
 

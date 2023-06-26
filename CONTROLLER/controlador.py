@@ -1,4 +1,3 @@
-from MODEL.calendario import Calendario
 from MODEL.cliente import Cliente
 from MODEL.lugar import Lugar
 from MODEL.servicio import Servicio
@@ -10,10 +9,9 @@ class SistemaReservas:
         self.vista = Vista()
         self.lugares = []
         self.servicios = []
-        self.calendario = Calendario()
         self.eventos = {}
     
-    #CARGAR Y MOSTRAR CALENDARIO 
+    #CARGAR, MOSTRAR CALENDARIO, BUSCAR  Y VERIFICAR CALENDARIO
     def cargar_calendario(self):
         with open("calendario.txt") as file:
             next(file)  # Omitir la primera línea de encabezado
@@ -26,6 +24,17 @@ class SistemaReservas:
         for fecha, disponibilidad in self.eventos.items():
             if disponibilidad == "Disponible":
                 print(fecha)
+                
+    def verificar_disponibilidad(self, fecha):
+        return self.eventos.get(fecha, "Fecha no encontrada")
+
+    def buscar_fecha_disponible(self, fecha):
+        fecha_obj = datetime.strptime(fecha, "%d/%m/%Y")
+        while True:
+            fecha_obj += timedelta(days=1)
+            fecha_nueva = fecha_obj.strftime("%d/%m/%Y")
+            if self.verificar_disponibilidad(fecha_nueva) == "Disponible":
+                return fecha_nueva
     
     #CARGAR Y MOSTRAR LUGARES
     def cargar_lugares(self):
@@ -42,6 +51,17 @@ class SistemaReservas:
             if lugar.disponibilidad == "Disponible":
                 print(f"{lugar.num}. Salón: {lugar.nombre} ~~ Precio: ${lugar.costo}")
         
+    def validar_lugar(self):
+        for i in range(1, 5):
+            while True:
+                try:
+                    opcion = self.vista.mostrar_mensaje3()
+                    if opcion in range(1, 5):
+                        return opcion
+                    else:
+                        self.vista.mostrar_mensaje3a()
+                except ValueError:
+                    self.vista.mostrar_mensaje3b()
     
     #CARGAR Y MOSTRAR SERVICIOS    
     def cargar_servicios(self):
@@ -57,24 +77,39 @@ class SistemaReservas:
         for servicio in self.servicios:
             if servicio.disponibilidad == "Disponible":
                 print(f"{servicio.num}. Servicio: {servicio.nombre} ~~ Precio: ${servicio.costo}")
+                
+    def validar_servicio(self):
+        for i in range(1, 24):
+            while True:
+                try:
+                    opciones = self.vista.mostrar_mensaje4()
+                    servicios_elegidos = [int(opcion) for opcion in opciones]
+                    for opcion in servicios_elegidos:
+                        if opcion not in range(1, 24):
+                            self.vista.mostrar_mensaje4a()
+                            break
+                    else:
+                        return servicios_elegidos
+                except ValueError:
+                    self.vista.mostrar_mensaje4b()
         
     #CLIENTE: INGRESAR DATOS
     def ingresar_datos(self): 
-        self.cliente.nombre = self.vista.mensaje_cliente3()
+        self.cliente.nombre = self.vista.mensaje_cliente1()
 
-        self.cliente.apellido = self.vista.mensaje_cliente6()
+        self.cliente.apellido = self.vista.mensaje_cliente2()
 
-        self.cliente.dni = self.vista.mensaje_cliente7()
+        self.cliente.dni = self.vista.mensaje_cliente3()
         while not self.cliente.dni.isdigit() or len(self.cliente.dni) != 8:
-            self.vista.mensaje_cliente8()
-            self.cliente.dni = self.vista.mensaje_cliente7()
+            self.vista.mensaje_cliente4()
+            self.cliente.dni = self.vista.mensaje_cliente3()
             
-        self.cliente.telefono = self.vista.mensaje_cliente10()
+        self.cliente.telefono = self.vista.mensaje_cliente5()
         while not self.cliente.telefono.isdigit() or len(self.cliente.telefono) != 10:
-            self.vista.mensaje_cliente10bis()
-            self.vista.mensaje_cliente10()
+            self.vista.mensaje_cliente6()
+            self.vista.mensaje_cliente5()
         
-        self.cliente.correo = self.vista.mensaje_cliente11()
+        self.cliente.correo = self.vista.mensaje_cliente7()
 
     #CLIENTE: GUARDAR DATOS
     def guardar_datos(self):
@@ -125,23 +160,24 @@ class SistemaReservas:
     def calcular_monto_sena(self, costo_total):
         return costo_total * 0.3
     
-    
     #REALIZAR RESERVA    
     def realizar_reserva(self, fecha, lugar_num, servicios_elegidos):
         self.cliente = Cliente()
         self.ingresar_datos()
-        self.guardar_datos()
-        self.guardar_reserva(fecha, lugar_num, servicios_elegidos) 
-        disponibilidad = self.calendario.verificar_disponibilidad(fecha)
-
-        if disponibilidad == ("Fecha no encontrada"):
+        
+        disponibilidad = self.verificar_disponibilidad(fecha)
+        
+        if disponibilidad == "Fecha no encontrada":
             return self.vista.mostrar_mensaje_reserva2()
 
-        if disponibilidad == ("No disponible"):
-            fecha_disponible = self.calendario.buscar_fecha_disponible(fecha)
-            self.vista.mostrar_mensaje_reserva2(), print(f"{fecha_disponible}.")
+        if disponibilidad == "No disponible":
+            fecha_disponible = self.buscar_fecha_disponible(fecha)
+            self.vista.mostrar_mensaje_reserva2()
+            print(f"{fecha_disponible}.")
             return
 
+        self.guardar_datos()
+        self.guardar_reserva(fecha, lugar_num, servicios_elegidos) 
         costo_total = self.calcular_costo_total(lugar_num, servicios_elegidos)
         monto_sena = self.calcular_monto_sena(costo_total)
 
@@ -163,7 +199,7 @@ class SistemaReservas:
                     servicio.disponibilidad = "No disponible"
 
             # Actualizar la disponibilidad en el calendario
-            self.calendario.eventos[fecha] = "No disponible"
+            self.eventos[fecha] = "No disponible"
 
         else:
             self.vista.mostrar_mensaje_reserva7()
@@ -171,7 +207,7 @@ class SistemaReservas:
     
     #CANCELAR RESERVA
     def cancelar_reserva(self, fecha):
-        disponibilidad = self.calendario.verificar_disponibilidad(fecha)
+        disponibilidad = self.verificar_disponibilidad(fecha)
 
         if disponibilidad == "Fecha no encontrada":
             self.vista.mostrar_mensaje_cancelar1()
@@ -250,10 +286,8 @@ class SistemaReservas:
                 elif opcion == "4":
                     self.vista.mostrar_mensaje1()
                     fecha = self.vista.mostrar_mensaje2()
-                    lugar_num = self.vista.mostrar_mensaje3()
-                    
-                    servicios_elegidos = self.vista.mostrar_mensaje4()
-                    
+                    lugar_num = self.validar_lugar()
+                    servicios_elegidos = self.validar_servicio()
                     if servicios_elegidos is not None:
                         servicios_elegidos = [int(servicio_num) for servicio_num in servicios_elegidos]
 

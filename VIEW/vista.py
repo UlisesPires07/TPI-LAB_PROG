@@ -34,33 +34,21 @@ class Vista:
         return input("Ingrese el nombre del cliente: ")
         
     def mensaje_cliente2(self):
-        return print("El nombre solo puede contener letras. Inténtelo nuevamente.")
+        return input("Ingrese el apellido del cliente: ")
         
     def mensaje_cliente3(self):
-        return input("Ingrese el nombre del cliente: ")
-        
-    def mensaje_cliente4(self):
-        return input("Ingrese el apellido del cliente: ")
-    
-    def mensaje_cliente5(self):
-        return print("El apellido solo puede contener letras. Inténtelo nuevamente.")
-    
-    def mensaje_cliente6(self):
-        return input("Ingrese el apellido del cliente: ")
-        
-    def mensaje_cliente7(self):
         return input("Ingrese el DNI del cliente: ")
         
-    def mensaje_cliente8(self):
+    def mensaje_cliente4(self):
         return print("El DNI debe ser un número de 8 dígitos. Inténtelo nuevamente.")
         
-    def mensaje_cliente10(self):
+    def mensaje_cliente5(self):
         return input("Ingrese el número de teléfono del cliente: ")
     
-    def mensaje_cliente10bis(self):
+    def mensaje_cliente6(self):
         return print("El teléfono debe ser un número de 10 dígitos. Inténtelo nuevamente.")
         
-    def mensaje_cliente11(self):
+    def mensaje_cliente7(self):
         return input("Ingrese el correo electrónico del cliente: ")
         
     def mensaje_cliente_guardar_reserva(self):
@@ -127,33 +115,22 @@ class Vista:
         return input("\nIngrese la fecha de la reserva (DD/MM/AAAA): ")
         
     def mostrar_mensaje3(self):
-        for i in range(1, 5):
-            while True:
-                try:
-                    opcion = int(input("Ingrese el número del lugar deseado: "))
-                    if opcion in range(1, 5):
-                        return opcion
-                    else:
-                        print("Opción inválida. Por favor, ingrese un número del 1 al 4.")
-                except ValueError:
-                    print("Entrada inválida. Por favor, ingrese un número del 1 al 4.")
+        return int(input("Ingrese el número del lugar deseado: "))
 
+    def mostrar_mensaje3a(self):
+        return print("Opción inválida. Por favor, ingrese un número del 1 al 4.")
+    
+    def mostrar_mensaje3b(self):
+        return print("Entrada inválida. Por favor, ingrese un número del 1 al 4.")
+    
     def mostrar_mensaje4(self):
-        for i in range(1, 24):
-            while True:
-                try:
-                    opciones = input("Ingrese los números de los servicios deseados (separados por comas): ").split(",")
-                    servicios_elegidos = [int(opcion) for opcion in opciones]
-                    for opcion in servicios_elegidos:
-                        if opcion not in range(1, 24):
-                            print("Opción inválida. Por favor, ingrese números del 1 al 23 separados por comas.")
-                            break
-                    else:
-                        return servicios_elegidos
-                except ValueError:
-                    print("Entrada inválida. Por favor, ingrese números del 1 al 23 separados por comas.")
-
-
+        return input("Ingrese los números de los servicios deseados (separados por comas): ").split(",")
+    
+    def mostrar_mensaje4a(self):
+        return print("Opción inválida. Por favor, ingrese números del 1 al 23 separados por comas.")
+    
+    def mostrar_mensaje4b(self):
+        return print("Entrada inválida. Por favor, ingrese números del 1 al 23 separados por comas.")
 
     def mostrar_mensaje5(self):
         return print("\n¡Cancelemos tu reserva!")
